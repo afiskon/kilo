@@ -181,8 +181,9 @@ char *Py_HL_keywords[] = {
 /* SQL */
 char *SQL_HL_extensions[] = {".sql",NULL};
 char *SQL_HL_keywords[] = {
-		"create", "temp", "temporary", "table", "insert", "into", "values", "update", "set", "where", "delete", "drop",
-		"do", "as", "declare", "begin", "end", "for", "in", "loop", "execute", "inherits", "vacuum", "full",
+		"create", "temp", "temporary", "table", "select", "from", "order", "by",
+		"insert", "into", "values", "update", "set", "where", "delete", "drop",
+		"do", "as", "declare", "if", "then", "begin", "end", "for", "in", "loop", "execute", "inherits", "vacuum", "full",
 		"or", "and", "alter", "add", "column", "savepoint", "rollback", "to", "commit", "raize", "exception",
         "int|", "integer|", "text|", "char|", "varchar|", "float|", NULL
 };
@@ -397,8 +398,18 @@ int editorRowHasOpenComment(erow *row) {
 
 bool match_keyword(char* p, char* kw, int klen, bool syntax_ci)
 {
-	// TODO: process syntax_ci
-	return (memcmp(p,kw,klen) == 0);
+	if(syntax_ci)
+	{
+		int i;
+		for(i = 0; i < klen; i++)
+			if(tolower(p[i]) != tolower(kw[i]))
+				return false;
+		return true;
+	}
+	else
+	{
+		return (memcmp(p,kw,klen) == 0);
+	}
 }
 /* Set every byte of row->hl (that corresponds to every character in the line)
  * to the right syntax highlight type (HL_* defines). */

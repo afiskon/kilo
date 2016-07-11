@@ -5,5 +5,8 @@
 * Lines numbers
 * Tabs
 * Case insensitive search
+* Regexp search
 * Multi line editing
-* vim-like command execution from the editor
+* Shell command execution from the editor
+* Build-in ctags equivalent
+* Debugger integration

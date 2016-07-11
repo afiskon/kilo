@@ -46,7 +46,7 @@
 #include <ctype.h>
 #include <sys/types.h>
 #include <sys/ioctl.h>
-#include <sys/time.h>
+#include <time.h>
 #include <unistd.h>
 #include <stdarg.h>
 #include <fcntl.h>
@@ -166,7 +166,7 @@ char *C_HL_keywords[] = {
         "struct","union","typedef","static","enum","class",
         /* C types */
         "int|","long|","double|","float|","char|","unsigned|","signed|",
-        "void|",NULL
+        "void|","#include|","#define|","#ifdef|","#endif|",NULL
 };
 
 /* Here we define an array of syntax highlights by extensions, keywords,

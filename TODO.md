@@ -3,6 +3,7 @@
 * Edit README.md
 * Handle home/end keys properly
 * Lines numbers
+* Goto line (optional - and offset)
 * Tabs
 * Syntax highlighting: Markdown, Erlang, Java, Scala, Perl, Ruby, C++, ...
 * Regexp search + remove regular search (including case insensitice)

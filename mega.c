@@ -181,7 +181,7 @@ char *Py_HL_keywords[] = {
 /* SQL */
 char *SQL_HL_extensions[] = {".sql",NULL};
 char *SQL_HL_keywords[] = {
-		"create", "temp", "temporary", "table", "select", "from", "order", "by",
+		"create", "temp", "temporary", "table", "select", "from", "order", "by", "limit",
 		"insert", "into", "values", "update", "set", "where", "delete", "drop",
 		"do", "as", "declare", "if", "then", "begin", "end", "for", "in", "loop", "execute", "inherits", "vacuum", "full",
 		"or", "and", "alter", "add", "column", "savepoint", "rollback", "to", "commit", "raize", "exception",

@@ -64,6 +64,7 @@
 
 #define HL_HIGHLIGHT_STRINGS (1<<0)
 #define HL_HIGHLIGHT_NUMBERS (1<<1)
+// TODO: case insensitive highlight (for SQL)
 
 struct editorSyntax {
     char **filematch;
@@ -176,7 +177,14 @@ char *Py_HL_keywords[] = {
         "str|","None|","type|", NULL
 };
 
-// TODO: SQL support!
+/* SQL */
+char *SQL_HL_extensions[] = {".sql",NULL};
+char *SQL_HL_keywords[] = {
+		"create", "temp", "temporary", "table", "insert", "into", "values", "update", "set", "where", "delete", "drop",
+		"do", "as", "declare", "begin", "end", "for", "in", "loop", "execute", "inherits", "vacuum", "full",
+		"or", "and", "alter", "add", "column", "savepoint", "rollback", "to", "commit", "raize", "exception",
+        "int|", "integer|", "text|", "char|", "varchar|", "float|", NULL
+};
 
 /* Here we define an array of syntax highlights by extensions, keywords,
  * comments delimiters and flags. */
@@ -193,6 +201,13 @@ struct editorSyntax HLDB[] = {
         Py_HL_extensions,
         Py_HL_keywords,
         "# ","","",
+        HL_HIGHLIGHT_STRINGS | HL_HIGHLIGHT_NUMBERS
+    },
+    {
+        /* SQL */
+        SQL_HL_extensions,
+        SQL_HL_keywords,
+        "--","/*","*/",
         HL_HIGHLIGHT_STRINGS | HL_HIGHLIGHT_NUMBERS
     }
 };

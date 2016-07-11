@@ -1,5 +1,6 @@
 # TODO
 
+* Edit README.md
 * Handle home/end keys properly
 * Lines numbers
 * Tabs

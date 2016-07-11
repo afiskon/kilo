@@ -6,4 +6,3 @@
 * Case insensitive search
 * Multi line editing
 * vim-like command execution from the editor
-* Clean screen right before exit (`system("clean");` ?)

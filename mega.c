@@ -50,6 +50,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <fcntl.h>
+#include <stdbool.h>
 
 /* Syntax highlight types */
 #define HL_NORMAL 0
@@ -64,7 +65,7 @@
 
 #define HL_HIGHLIGHT_STRINGS (1<<0)
 #define HL_HIGHLIGHT_NUMBERS (1<<1)
-// TODO: case insensitive highlight (for SQL)
+#define HL_HIGHLIGHT_CASEINSENSITIVE (1<<2)
 
 struct editorSyntax {
     char **filematch;
@@ -208,7 +209,7 @@ struct editorSyntax HLDB[] = {
         SQL_HL_extensions,
         SQL_HL_keywords,
         "--","/*","*/",
-        HL_HIGHLIGHT_STRINGS | HL_HIGHLIGHT_NUMBERS
+        HL_HIGHLIGHT_STRINGS | HL_HIGHLIGHT_NUMBERS | HL_HIGHLIGHT_CASEINSENSITIVE
     }
 };
 
@@ -394,6 +395,11 @@ int editorRowHasOpenComment(erow *row) {
     return 0;
 }
 
+bool match_keyword(char* p, char* kw, int klen, bool syntax_ci)
+{
+	// TODO: process syntax_ci
+	return (memcmp(p,kw,klen) == 0);
+}
 /* Set every byte of row->hl (that corresponds to every character in the line)
  * to the right syntax highlight type (HL_* defines). */
 void editorUpdateSyntax(erow *row) {
@@ -408,6 +414,8 @@ void editorUpdateSyntax(erow *row) {
     char *scs = E.syntax->singleline_comment_start;
     char *mcs = E.syntax->multiline_comment_start;
     char *mce = E.syntax->multiline_comment_end;
+	int flags = E.syntax->flags;
+	bool syntax_ci = (flags & HL_HIGHLIGHT_CASEINSENSITIVE);
 
     /* Point to the first non-space char. */
     p = row->render;
@@ -503,7 +511,7 @@ void editorUpdateSyntax(erow *row) {
                 int kw2 = keywords[j][klen-1] == '|';
                 if (kw2) klen--;
 
-                if (!memcmp(p,keywords[j],klen) &&
+                if (match_keyword(p,keywords[j],klen,syntax_ci) &&
                     is_separator(*(p+klen)))
                 {
                     /* Keyword */

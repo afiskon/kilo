@@ -169,6 +169,15 @@ char *C_HL_keywords[] = {
         "void|","#include|","#define|","#ifdef|","#endif|",NULL
 };
 
+/* Python */
+char *Py_HL_extensions[] = {".py",NULL};
+char *Py_HL_keywords[] = {
+		"import","def", "return", "if", "is", "not", "with", "as", "in", "class"
+        "str|","None|","type|", NULL
+};
+
+// TODO: SQL support!
+
 /* Here we define an array of syntax highlights by extensions, keywords,
  * comments delimiters and flags. */
 struct editorSyntax HLDB[] = {
@@ -177,6 +186,13 @@ struct editorSyntax HLDB[] = {
         C_HL_extensions,
         C_HL_keywords,
         "//","/*","*/",
+        HL_HIGHLIGHT_STRINGS | HL_HIGHLIGHT_NUMBERS
+    },
+    {
+        /* Python */
+        Py_HL_extensions,
+        Py_HL_keywords,
+        "# ","","",
         HL_HIGHLIGHT_STRINGS | HL_HIGHLIGHT_NUMBERS
     }
 };

@@ -14,6 +14,7 @@
 * Shell command execution from the editor
 * Build-in ctags equivalent, goto definition
 * Code completion
+* Folding
 * Build-in mans/documention?
 * Debugger integration
 * VCS (git, svn, mercurial) integration, `git blame`
